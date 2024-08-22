@@ -1,0 +1,47 @@
+import React, { useState, useEffect } from "react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { FiSun, FiMoon } from "react-icons/fi";
+
+const Navbar = () => {
+  const [darkMode, setDarkMode] = useState(true);
+
+  const toggleMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      darkMode ? "dark" : "light"
+    );
+  }, [darkMode]);
+
+  return (
+    <nav className="container px-8 xl:max-w-screen-xl mx-auto mb-8 flex items-center justify-between sm:py-6">
+      <div
+        className="flex flex-shrink-0 items-center text-2xl font-bold"
+        style={{ color: "var(--text-color)" }}
+      >
+        {/* <img src={logo} alt="Logo" /> */}
+        rhShihab
+      </div>
+      <div className="m-8 flex items-center justify-end gap-4 text-2xl">
+        {/* <a href="https://www.linkedin.com/in/rhshihab/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--icon-color)' }}>
+          <FaLinkedin />
+        </a>
+        <a href="https://github.com/RHShihab" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--icon-color)' }}>
+          <FaGithub />
+        </a> */}
+        <button
+          onClick={toggleMode}
+          className="p-2 rounded-full transition-transform transform hover:scale-[1.2]"
+          style={{ color: "var(--icon-color)" }}
+        >
+          {darkMode ? <FiMoon size={24} /> : <FiSun size={24} />}
+        </button>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

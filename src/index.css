@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-color: #f8fafc;
+  --text-color: #111827;
+  --icon-color: #333;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-color: #111827;
+  --text-color: #f8fafc;
+  --icon-color: #ccc;
+}
+
+@layer utilities {
+  .custom-gradient-grid {
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, #a78bfa 32%, transparent) 70%,
+      #a78bfa 100%
+    );
+    background-position-y: -200px;
+    background-size: 100% 100%;
+    -webkit-mask-image: linear-gradient(90deg, #fff 1px, transparent 0),
+      linear-gradient(180deg, #fff 1px, transparent 0);
+    mask-image: linear-gradient(90deg, #fff 1px, transparent 0),
+      linear-gradient(180deg, #fff 1px, transparent 0);
+    -webkit-mask-position: calc(mod(100vw, 3rem) / 2) 0;
+    mask-position: calc(mod(100vw, 3rem) / 2) 0;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    -webkit-mask-size: 3rem 3rem;
+    mask-size: 3rem 3rem;
+  }
+}
