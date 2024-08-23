@@ -1,4 +1,4 @@
-import pic1 from "../../assets/projects/incubator-circuit.jpg";
+import pic1 from "../../assets/projects/Incubator-circuit.jpg";
 import pic2 from "../../assets/projects/IubBongomarine.png";
 import pic3 from "../../assets/projects/Shuchimita-circuit.jpg";
 import pic4 from "../../assets/projects/Shuchimita.png";
