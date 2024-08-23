@@ -33,10 +33,10 @@ const Navbar = ({ darkMode, toggleMode, loading }) => {
       >
         rhShihab
       </div>
-      <div className="m-8 flex items-center justify-end gap-4 text-2xl">
+      <div className="my-8 flex items-center justify-end gap-4 text-2xl">
         <button
           onClick={toggleMode}
-          className="p-2 rounded-full transition-transform transform hover:scale-[1.2]"
+          className="py-2 rounded-full transition-transform transform hover:scale-[1.2]"
           style={{ color: "var(--icon-color)" }}
         >
           {darkMode ? <FiMoon size={24} /> : <FiSun size={24} />}
