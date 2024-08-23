@@ -23,7 +23,7 @@ function HeroCarousel() {
       loop={true}
       freeMode={true}
       autoplay={{ delay: 4000 }}
-      className="max-w-md"
+      className="max-w-sm"
       // onSlideChange={() => console.log("slide change")}
       // onSwiper={(swiper) => console.log(swiper)}
     >

@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FiSun, FiMoon } from "react-icons/fi";
 
-const Navbar = ({ darkMode, toggleMode }) => {
+const Navbar = ({ darkMode, toggleMode, loading }) => {
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
@@ -10,10 +11,24 @@ const Navbar = ({ darkMode, toggleMode }) => {
     );
   }, [darkMode]);
 
+  const navbarVariants = {
+    hidden: { y: -100, opacity: 0 },
+    visible: {
+      y: 0,
+      transition: { delay: 0.5, duration: 0.5, ease: "easeOut" },
+      opacity: 1,
+    },
+  };
+
   return (
-    <nav className="container px-8 xl:max-w-screen-xl mx-auto mb-8 flex items-center justify-between sm:py-6">
+    <motion.nav
+      variants={navbarVariants}
+      initial="hidden"
+      animate={loading ? "hidden" : "visible"}
+      className="container px-8 xl:max-w-screen-xl mx-auto flex items-center justify-between sm:py-6"
+    >
       <div
-        className="flex flex-shrink-0 items-center text-2xl font-bold"
+        className="flex flex-shrink-0 items-center text-xl font-bold"
         style={{ color: "var(--text-color)" }}
       >
         rhShihab
@@ -27,7 +42,7 @@ const Navbar = ({ darkMode, toggleMode }) => {
           {darkMode ? <FiMoon size={24} /> : <FiSun size={24} />}
         </button>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
