@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FiSun, FiMoon } from "react-icons/fi";
 
-const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(true);
-
-  const toggleMode = () => {
-    setDarkMode(!darkMode);
-  };
-
+const Navbar = ({ darkMode, toggleMode }) => {
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
@@ -22,16 +16,9 @@ const Navbar = () => {
         className="flex flex-shrink-0 items-center text-2xl font-bold"
         style={{ color: "var(--text-color)" }}
       >
-        {/* <img src={logo} alt="Logo" /> */}
         rhShihab
       </div>
       <div className="m-8 flex items-center justify-end gap-4 text-2xl">
-        {/* <a href="https://www.linkedin.com/in/rhshihab/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--icon-color)' }}>
-          <FaLinkedin />
-        </a>
-        <a href="https://github.com/RHShihab" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--icon-color)' }}>
-          <FaGithub />
-        </a> */}
         <button
           onClick={toggleMode}
           className="p-2 rounded-full transition-transform transform hover:scale-[1.2]"

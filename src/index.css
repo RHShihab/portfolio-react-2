@@ -6,6 +6,8 @@
   --bg-color: #f8fafc;
   --text-color: #111827;
   --icon-color: #333;
+  --opposite-bg-color: #333; /* Dark color */
+  --opposite-text-color: #fff; /* Light text */
 }
 
 /* Dark theme */
@@ -13,6 +15,8 @@
   --bg-color: #111827;
   --text-color: #f8fafc;
   --icon-color: #ccc;
+  --opposite-bg-color: #f9fafb; /* Light color */
+  --opposite-text-color: #000; /* Dark text */
 }
 
 @layer utilities {
