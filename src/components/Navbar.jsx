@@ -25,7 +25,7 @@ const Navbar = ({ darkMode, toggleMode, loading }) => {
       variants={navbarVariants}
       initial="hidden"
       animate={loading ? "hidden" : "visible"}
-      className="container px-8 xl:max-w-screen-xl mx-auto flex items-center justify-between sm:py-6"
+      className="container pt-6 px-8 xl:max-w-screen-xl mx-auto flex items-center justify-between sm:py-8"
     >
       <div
         className="flex flex-shrink-0 items-center text-xl font-bold"
@@ -33,7 +33,7 @@ const Navbar = ({ darkMode, toggleMode, loading }) => {
       >
         rhShihab
       </div>
-      <div className="my-8 flex items-center justify-end gap-4 text-2xl">
+      <div className="flex items-center justify-end gap-4 text-2xl">
         <button
           onClick={toggleMode}
           className="py-2 rounded-full transition-transform transform hover:scale-[1.2]"

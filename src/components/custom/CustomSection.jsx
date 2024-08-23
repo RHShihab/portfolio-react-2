@@ -1,6 +1,6 @@
 const CustomSection = ({ className = "", children }) => {
   return (
-    <section className="relative">
+    <section className="relative min-h-screen">
       <div
         className={`${className} container px-8 xl:max-w-screen-xl mx-auto pb-24`}
       >

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Experience from "./components/Experience";
 import { motion, AnimatePresence } from "framer-motion";
 
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
   return (
     <AnimatePresence>
       <motion.div
-        className="min-h-screen transition-colors duration-500"
+        className="min-h-screen transition-colors duration-500 overflow-hidden"
         style={{
           backgroundColor: "var(--bg-color)",
           color: "var(--text-color)",
@@ -40,6 +41,7 @@ const App = () => {
               loading={loading}
             />
             <Hero />
+            <Experience />
           </>
         )}
       </motion.div>
