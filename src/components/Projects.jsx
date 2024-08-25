@@ -4,8 +4,8 @@ import CustomSection from "./custom/CustomSection";
 
 const Projects = () => {
   return (
-    <CustomSection className="overflow-x-hidden">
-      <motion.h2
+    <CustomSection className="overflow-x-hidden min-h-screen">
+      {/* <motion.h2
         initial={{ opacity: 0, y: -100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5 }}
@@ -40,7 +40,6 @@ const Projects = () => {
                 {project.title} {project.subTitle && ` - `}{" "}
                 <span>{project.subTitle}</span>
               </h6>
-              {/* <p className="mb-4 text-neutral-400">{project.description}</p> */}
               {project.description.split("\n").map((line, index) => (
                 <p key={index} className="mb-2 text-neutral-400">
                   {line}
@@ -57,7 +56,7 @@ const Projects = () => {
             </motion.div>
           </div>
         ))}
-      </div>
+      </div> */}
     </CustomSection>
   );
 };

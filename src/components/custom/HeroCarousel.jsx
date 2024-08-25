@@ -15,7 +15,7 @@ import "swiper/css/navigation";
 
 const HeroCarousel = () => {
   const renderSlide = (imgSrc, title, description) => (
-    <div className="relative w-full aspect-[4/5] overflow-hidden">
+    <div className="relative w-full aspect-[4/5]">
       <img
         className="w-full h-full object-cover object-center rounded-t-2xl rounded-b-3xl"
         src={imgSrc}
@@ -59,16 +59,16 @@ const HeroCarousel = () => {
         }
 
         .custom-bullet {
-          width: 8px;
-          height: 8px;
+          width: 6px;
+          height: 6px;
           background-color: gray;
           border-radius: 4px;
           transition: all 0.3s ease;
         }
 
         .swiper-pagination-bullet-active {
-          width: 16px;
-          height: 8px;
+          width: 12px;
+          height: 6px;
           background-color: white;
         }
       `}</style>

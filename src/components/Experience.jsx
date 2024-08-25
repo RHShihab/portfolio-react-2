@@ -1,9 +1,15 @@
 import { EXPERIENCES } from "../constants";
 import CustomSection from "./custom/CustomSection";
+import ExperienceCarousel from "./custom/ExperienceCarousel";
 import { motion, useScroll } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
-const ExperienceItem = ({ experience, index }) => {
+const ExperienceItem = ({
+  experience,
+  index,
+  experienceScrollIndex,
+  setExperienceScrollIndex,
+}) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -12,14 +18,39 @@ const ExperienceItem = ({ experience, index }) => {
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((value) => {
-      console.log(`Experience Item ${index} scroll progress:`, value);
+      if (
+        value < 0.5 &&
+        experienceScrollIndex === index &&
+        experienceScrollIndex !== 0
+      ) {
+        console.log("Decreasing index");
+        setExperienceScrollIndex((prevIndex) =>
+          prevIndex > 0 ? prevIndex - 1 : 0
+        );
+      } else if (value > 0.5 && experienceScrollIndex < index) {
+        console.log("Increasing index");
+        setExperienceScrollIndex(index);
+      } else {
+        console.log("No index change");
+      }
     });
 
     return () => unsubscribe();
-  }, [scrollYProgress, index]);
+  }, [scrollYProgress, experienceScrollIndex]);
+
+  useEffect(() => {
+    console.log(`Updating experienceScrollIndex to: ${experienceScrollIndex}`);
+  }, [experienceScrollIndex]);
+
+  // Calculate opacity based on whether the index matches experienceScrollIndex
+  const opacity = experienceScrollIndex === index ? 1 : 0.5;
 
   return (
-    <motion.div ref={ref} className="lg:pb-20 border-4 border-amber-900">
+    <motion.div
+      ref={ref}
+      className="lg:pb-20"
+      style={{ opacity }} // Apply opacity here
+    >
       <p className="mb-2 text-sm">{experience.year}</p>
       <h3 className="mb-2 font-semibold text-3xl">{experience.role}</h3>
       <h4 className="mb-2 font-semibold text-2xl">{experience.company}</h4>
@@ -48,6 +79,8 @@ const ExperienceItem = ({ experience, index }) => {
 };
 
 const Experience = () => {
+  const [experienceScrollIndex, setExperienceScrollIndex] = useState(0);
+
   return (
     <CustomSection
       className="min-h-screen"
@@ -56,26 +89,23 @@ const Experience = () => {
       <h2 className="py-20 text-center text-4xl">Experience</h2>
       <div className="relative">
         <div className="grid grid-cols-[8px_1fr] gap-x-[20px] lg:grid-cols-1">
-          <div className="relative row-span-4 lg:absolute lg:h-full lg:w-full border-2 border-cyan-500"></div>
-          <div className="flex flex-col gap-[24px] lg:flex-row-reverse lg:gap-[128px] border-2 border-green-500">
+          <div className="relative row-span-4 lg:absolute lg:h-full lg:w-full "></div>
+          <div className="flex flex-col gap-[24px] lg:flex-row-reverse lg:gap-[128px] ">
             <div className="lg:max-w-[540px] lg:flex-1">
               {EXPERIENCES.map((experience, index) => (
                 <ExperienceItem
                   key={index}
                   experience={experience}
                   index={index}
+                  experienceScrollIndex={experienceScrollIndex}
+                  setExperienceScrollIndex={setExperienceScrollIndex}
                 />
               ))}
             </div>
-            <div className="hidden lg:visible lg:max-w-[540px] lg:flex lg:flex-1 lg:items-start lg:justify-end border-4 border-red-600">
-              <div
-                className="border-blue-400 border-2 sticky"
-                style={{ top: "calc(25vh - 1rem)" }}
-              >
-                <img
-                  src={EXPERIENCES[0].image}
-                  alt=""
-                  className="rounded-xl lg:max-w-sm xl:max-w-md"
+            <div className="hidden lg:visible lg:max-w-[540px] lg:flex lg:flex-1 lg:items-start lg:justify-end ">
+              <div className="sticky" style={{ top: "calc(20vh)" }}>
+                <ExperienceCarousel
+                  experienceScrollIndex={experienceScrollIndex}
                 />
               </div>
             </div>

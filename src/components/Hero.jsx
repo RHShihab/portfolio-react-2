@@ -20,11 +20,11 @@ const revealVariants = (direction, delay) => ({
 const avaterPopVariants = (delay) => ({
   hidden: {
     scale: 0,
-    transition: { delay: delay, duration: 0.2, ease: [0.6, 0.01, -0.05, 0.9] },
+    transition: { delay: delay, duration: 0.4, ease: [0.6, 0.01, -0.05, 0.9] },
   },
   visible: {
     scale: 1,
-    transition: { delay: delay, duration: 0.2, ease: [0.6, 0.01, -0.05, 0.9] },
+    transition: { delay: delay, duration: 0.4, ease: [0.6, 0.01, -0.05, 0.9] },
   },
 });
 
@@ -58,7 +58,7 @@ const Hero = () => {
             <div className="flex mb-6 w-full lg:w-fit">
               <motion.div
                 layoutId="loader-greeting-avater"
-                variants={avaterPopVariants(avaterInView ? 0 : 0.2)}
+                variants={avaterPopVariants(avaterInView ? 0 : 0.4)}
                 initial="visible"
                 animate={avaterInView ? "visible" : "hidden"}
                 className="w-14 h-14 md:w-20 md:h-20 mr-4 rounded-full overflow-hidden"
@@ -67,7 +67,7 @@ const Hero = () => {
               </motion.div>
               <motion.div
                 layoutId="loader-greeting-name"
-                variants={avaterPopVariants(avaterInView ? 0.2 : 0)}
+                variants={avaterPopVariants(avaterInView ? 0.4 : 0)}
                 initial="visible"
                 animate={avaterInView ? "visible" : "hidden"}
                 style={{
