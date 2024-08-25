@@ -11,22 +11,8 @@ const Navbar = ({ darkMode, toggleMode, loading }) => {
     );
   }, [darkMode]);
 
-  const navbarVariants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: {
-      y: 0,
-      transition: { delay: 0.5, duration: 0.5, ease: "easeOut" },
-      opacity: 1,
-    },
-  };
-
   return (
-    <motion.nav
-      variants={navbarVariants}
-      initial="hidden"
-      animate={loading ? "hidden" : "visible"}
-      className="container pt-6 px-8 xl:max-w-screen-xl mx-auto flex items-center justify-between sm:py-8"
-    >
+    <nav className="container pt-6 px-8 xl:max-w-screen-xl mx-auto flex items-center justify-between sm:py-8">
       <div
         className="flex flex-shrink-0 items-center text-xl font-bold"
         style={{ color: "var(--text-color)" }}
@@ -42,7 +28,7 @@ const Navbar = ({ darkMode, toggleMode, loading }) => {
           {darkMode ? <FiMoon size={24} /> : <FiSun size={24} />}
         </button>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

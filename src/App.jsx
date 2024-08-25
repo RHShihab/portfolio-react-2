@@ -3,6 +3,7 @@ import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Experience from "./components/Experience";
+import Projects from "./components/Projects";
 import { motion, AnimatePresence } from "framer-motion";
 
 const App = () => {
@@ -21,10 +22,19 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
+  const navbarVariants = (direction, delay) => ({
+    hidden: { y: direction === "top" ? -100 : 100, opacity: 0 },
+    visible: {
+      y: 0,
+      transition: { delay: delay, duration: 0.5, ease: "easeOut" },
+      opacity: 1,
+    },
+  });
+
   return (
     <AnimatePresence>
-      <motion.div
-        className="min-h-screen transition-colors duration-500 overflow-hidden"
+      <motion.main
+        className="min-h-screen transition-colors duration-500"
         style={{
           backgroundColor: "var(--bg-color)",
           color: "var(--text-color)",
@@ -35,16 +45,29 @@ const App = () => {
           <Loader setLoading={setLoading} />
         ) : (
           <>
-            <Navbar
-              darkMode={darkMode}
-              toggleMode={toggleMode}
-              loading={loading}
-            />
+            <motion.div
+              variants={navbarVariants("top", 0.5)}
+              initial="hidden"
+              animate={loading ? "hidden" : "visible"}
+            >
+              <Navbar
+                darkMode={darkMode}
+                toggleMode={toggleMode}
+                loading={loading}
+              />
+            </motion.div>
             <Hero />
-            <Experience />
+            <motion.div
+              variants={navbarVariants("bottom", 1)}
+              initial="hidden"
+              animate={loading ? "hidden" : "visible"}
+            >
+              <Experience />
+              <Projects />
+            </motion.div>
           </>
         )}
-      </motion.div>
+      </motion.main>
     </AnimatePresence>
   );
 };

@@ -24,9 +24,39 @@ function HeroCarousel() {
       freeMode={true}
       autoplay={{ delay: 4000 }}
       className="max-w-sm"
-      // onSlideChange={() => console.log("slide change")}
-      // onSwiper={(swiper) => console.log(swiper)}
+      pagination={{
+        clickable: true,
+        renderBullet: (index, className) => {
+          return `<div class="${className} custom-bullet"></div>`;
+        },
+      }}
     >
+      <style jsx>{`
+        .swiper-pagination {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateY(-25px);
+          display: flex;
+          justify-content: center;
+          gap: 6px; /* Space between bullets */
+        }
+
+        .custom-bullet {
+          width: 8px; /* w-8 */
+          height: 8px; /* h-8 */
+          background-color: gray;
+          border-radius: 9999px; /* rounded-full */
+          transition: all 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+          width: 16px; /* Adjust as needed for larger active bullets */
+          height: 8px; /* Adjust as needed for larger active bullets */
+          background-color: white;
+        }
+      `}</style>
+      ;
       <SwiperSlide>
         <div className="relative w-full aspect-[4/5] overflow-hidden">
           <img
@@ -35,7 +65,7 @@ function HeroCarousel() {
             alt=""
           />
           <img
-            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl"
+            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl pointer-events-none"
             src={overlayPic}
             alt="Overlay"
           />
@@ -53,7 +83,7 @@ function HeroCarousel() {
             alt=""
           />
           <img
-            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl"
+            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl pointer-events-none"
             src={overlayPic}
             alt="Overlay"
           />
@@ -71,7 +101,7 @@ function HeroCarousel() {
             alt=""
           />
           <img
-            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl"
+            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl pointer-events-none"
             src={overlayPic}
             alt="Overlay"
           />
@@ -89,7 +119,7 @@ function HeroCarousel() {
             alt=""
           />
           <img
-            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl"
+            className="absolute bottom-0 left-0 w-full object-contain rounded-3xl pointer-events-none"
             src={overlayPic}
             alt="Overlay"
           />

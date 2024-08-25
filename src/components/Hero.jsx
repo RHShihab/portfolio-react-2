@@ -49,7 +49,7 @@ const Hero = () => {
   }, [scrollYProgress]);
 
   return (
-    <CustomSection>
+    <CustomSection className="overflow-x-hidden">
       <div ref={nameRef} className="h-4"></div>
       <div className=" mt-8 flex flex-wrap justify-center">
         <div className=" w-full lg:w-1/2">

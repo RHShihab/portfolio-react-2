@@ -18,6 +18,7 @@ export const EXPERIENCES = [
 -	Over 300+ contributions and issues closed in GitHub project board
 `,
     technologies: ["React.js", "Node.js", "MaterialUI", "PostgreSQL"],
+    image: Shuchimita,
   },
   {
     year: "2019 - 2023",
@@ -28,6 +29,7 @@ export const EXPERIENCES = [
 -	Navigate through IEC Standards while developing Neonatal Incubator, Photo Therapy Light
 `,
     technologies: ["Fusion360", "3D Printing", "Laser Cutting"],
+    image: Incubator2,
   },
 ];
 

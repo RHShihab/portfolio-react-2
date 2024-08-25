@@ -4,6 +4,7 @@
 
 :root {
   --bg-color: #f8fafc;
+  --bg-color-light: #b1cfee;
   --text-color: #111827;
   --icon-color: #333;
   --opposite-bg-color: #333; /* Dark color */
@@ -13,6 +14,7 @@
 /* Dark theme */
 [data-theme="dark"] {
   --bg-color: #111827;
+  --bg-color-light: #1b263e;
   --text-color: #f8fafc;
   --icon-color: #ccc;
   --opposite-bg-color: #f9fafb; /* Light color */
