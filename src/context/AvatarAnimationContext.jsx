@@ -1,4 +1,3 @@
-// context/AvatarAnimationContext.js
 import React, { createContext, useState } from "react";
 
 export const AvatarAnimationContext = createContext();

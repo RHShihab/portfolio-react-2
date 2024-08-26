@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import { motion, AnimatePresence } from "framer-motion";
+import AvatarAnimationProvider from "./context/AvatarAnimationContext";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -41,32 +42,34 @@ const App = () => {
         }}
       >
         <div className="custom-gradient-grid fixed top-0 left-0 w-full h-full opacity-60"></div>
-        {loading ? (
-          <Loader setLoading={setLoading} />
-        ) : (
-          <>
-            <motion.div
-              variants={navbarVariants("top", 0.5)}
-              initial="hidden"
-              animate={loading ? "hidden" : "visible"}
-            >
-              <Navbar
-                darkMode={darkMode}
-                toggleMode={toggleMode}
-                loading={loading}
-              />
-            </motion.div>
-            <Hero />
-            <motion.div
-              variants={navbarVariants("bottom", 1)}
-              initial="hidden"
-              animate={loading ? "hidden" : "visible"}
-            >
-              <Experience />
-              <Projects />
-            </motion.div>
-          </>
-        )}
+        <AvatarAnimationProvider>
+          {loading ? (
+            <Loader setLoading={setLoading} />
+          ) : (
+            <>
+              <motion.div
+                variants={navbarVariants("top", 0.5)}
+                initial="hidden"
+                animate={loading ? "hidden" : "visible"}
+              >
+                <Navbar
+                  darkMode={darkMode}
+                  toggleMode={toggleMode}
+                  loading={loading}
+                />
+              </motion.div>
+              <Hero />
+              <motion.div
+                variants={navbarVariants("bottom", 1)}
+                initial="hidden"
+                animate={loading ? "hidden" : "visible"}
+              >
+                <Experience />
+                <Projects />
+              </motion.div>
+            </>
+          )}
+        </AvatarAnimationProvider>
       </motion.main>
     </AnimatePresence>
   );
