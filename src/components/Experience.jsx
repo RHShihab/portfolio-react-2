@@ -1,6 +1,6 @@
 import { EXPERIENCES } from "../constants";
 import CustomSection from "./custom/CustomSection";
-import ExperienceCarousel from "./custom/ExperienceCarousel";
+import DynamicCarousel from "./custom/DynamicCarousel";
 import StickyAvatar from "./custom/StickyAvatar";
 import { motion, useScroll } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -25,6 +25,7 @@ const WhiteDot = ({ position, visible }) => {
     </div>
   );
 };
+
 const GridLine = () => {
   return (
     <div className="relative row-span-4 lg:absolute lg:h-full lg:w-full ">
@@ -72,11 +73,11 @@ const GridLineGradiant = ({ position }) => {
   );
 };
 
-const ExperienceItem = ({
-  experience,
+const ListItemRow = ({
+  listItem,
   index,
-  experienceScrollIndex,
-  setExperienceScrollIndex,
+  listItemScrollIndex,
+  setListItemScrollIndex,
 }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -88,46 +89,48 @@ const ExperienceItem = ({
     const unsubscribe = scrollYProgress.onChange((value) => {
       if (
         value < 0.5 &&
-        experienceScrollIndex === index &&
-        experienceScrollIndex !== 0
+        listItemScrollIndex === index &&
+        listItemScrollIndex !== 0
       ) {
-        console.log("Decreasing index");
-        setExperienceScrollIndex((prevIndex) =>
+        // console.log("Decreasing index");
+        setListItemScrollIndex((prevIndex) =>
           prevIndex > 0 ? prevIndex - 1 : 0
         );
-      } else if (value > 0.5 && experienceScrollIndex < index) {
-        console.log("Increasing index");
-        setExperienceScrollIndex(index);
+      } else if (value > 0.5 && listItemScrollIndex < index) {
+        // console.log("Increasing index");
+        setListItemScrollIndex(index);
       } else {
-        console.log("No index change");
+        // console.log("No index change");
       }
     });
 
     return () => unsubscribe();
-  }, [scrollYProgress, experienceScrollIndex]);
+  }, [scrollYProgress, listItemScrollIndex]);
 
   useEffect(() => {
-    console.log(`Updating experienceScrollIndex to: ${experienceScrollIndex}`);
-  }, [experienceScrollIndex]);
+    console.log(`Updating listItemScrollIndex to: ${listItemScrollIndex}`);
+  }, [listItemScrollIndex]);
 
-  // Calculate opacity based on whether the index matches experienceScrollIndex
-  const opacity = experienceScrollIndex === index ? 1 : 0.5;
+  // Calculate opacity based on whether the index matches listItemScrollIndex
+  const opacity = listItemScrollIndex === index ? 1 : 0.5;
 
   return (
     <motion.div ref={ref} className="lg:pb-20 lg:relative pt-1">
       {/* Left blue dot */}
       <WhiteDot position="top" visible={opacity === 1} />
       <div style={{ opacity }}>
-        <p className="mb-2 text-sm">{experience.year}</p>
-        <h3 className="mb-2 font-semibold text-3xl">{experience.role}</h3>
-        <h4 className="mb-2 font-semibold text-2xl">{experience.company}</h4>
-        {experience.description.split("\n").map((line, index) => (
+        {listItem.year && <p className="mb-4 text-sm">{listItem.year}</p>}
+        <h3 className="mt-[-10px] mb-2 font-semibold text-3xl">
+          {listItem.title}
+        </h3>
+        <h4 className="mb-2 font-semibold text-xl">{listItem.subtitle}</h4>
+        {listItem.description.split("\n").map((line, index) => (
           <p key={index} className="mb-2">
             {line}
           </p>
         ))}
         <div className="flex flex-wrap">
-          {experience.technologies.map((tech, index) => (
+          {listItem.technologies.map((tech, index) => (
             <span
               key={index}
               className="mr-2 mt-2 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-purple-300"
@@ -136,8 +139,9 @@ const ExperienceItem = ({
             </span>
           ))}
         </div>
+        {/* TODO: add projects carousel here */}
         <img
-          src={experience.image}
+          src={listItem.image[0]}
           alt=""
           className="mt-4 mb-10 rounded-xl lg:max-w-sm lg:hidden"
         />
@@ -146,15 +150,15 @@ const ExperienceItem = ({
   );
 };
 
-const Experience = () => {
-  const [experienceScrollIndex, setExperienceScrollIndex] = useState(0);
+const Experience = ({ SectionTopic, title }) => {
+  const [listItemScrollIndex, setListItemScrollIndex] = useState(0);
 
   return (
     <CustomSection
-      className="min-h-screen"
+      className="min-h-screen border-t-2 border-t-white border-b-2 border-b-white"
       style={{ backgroundColor: "var(--bg-color-light)" }}
     >
-      <h2 className="py-20 text-center text-4xl">Experience</h2>
+      <h2 className="py-20 text-center text-4xl">{title}</h2>
       <div className="relative">
         <GridLineGradiant position="top" />
       </div>
@@ -163,29 +167,36 @@ const Experience = () => {
         <div className="absolute left-[20px] ml-[-8px] h-full w-[16px] sm:left-[36px] lg:left-[50%] lg:block">
           <StickyAvatar />
         </div>
-        {/* container for the experience items and carousel */}
+        {/* container for the listItem items and carousel */}
         <div className="grid grid-cols-[8px_1fr] gap-x-[20px] lg:grid-cols-1">
           {/* vertical line */}
           <GridLine />
-          {/* container for the experience items */}
+          {/* container for the listItem items */}
           <div className="flex flex-col gap-[24px] lg:flex-row-reverse lg:gap-[128px] ">
             <div className="lg:max-w-[540px] lg:flex-1">
-              {EXPERIENCES.map((experience, index) => (
-                <ExperienceItem
+              {SectionTopic.map((listItem, index) => (
+                <ListItemRow
                   key={index}
-                  experience={experience}
+                  listItem={listItem}
                   index={index}
-                  experienceScrollIndex={experienceScrollIndex}
-                  setExperienceScrollIndex={setExperienceScrollIndex}
+                  listItemScrollIndex={listItemScrollIndex}
+                  setListItemScrollIndex={setListItemScrollIndex}
                 />
               ))}
             </div>
             <div className="hidden lg:visible lg:max-w-[540px] lg:flex lg:flex-1 lg:items-start lg:justify-end ">
-              <div className="sticky" style={{ top: "calc(20vh)" }}>
-                <ExperienceCarousel
-                  experienceScrollIndex={experienceScrollIndex}
+              <motion.div
+                initial={{ scale: 1, opacity: 0.5 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                key={listItemScrollIndex}
+                className="sticky"
+                style={{ top: "calc(23vh)" }}
+              >
+                <DynamicCarousel
+                  images={SectionTopic[listItemScrollIndex].image}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
