@@ -42,11 +42,12 @@ const GridLine = () => {
 };
 
 const GridLineGradiant = ({ position }) => {
+  let background = "";
   if (position === "top") {
-    background = "linear-gradient(to top, var(--bg-color-light), transparent)";
-  } else if (position === "bottom") {
     background =
       "linear-gradient(to bottom, var(--bg-color-light), transparent)";
+  } else if (position === "bottom") {
+    background = "linear-gradient(to top, var(--bg-color-light), transparent)";
   }
 
   return (
