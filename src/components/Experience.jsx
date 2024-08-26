@@ -5,21 +5,50 @@ import StickyAvatar from "./custom/StickyAvatar";
 import { motion, useScroll } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
-const WhiteDot = ({ className }) => {
+const WhiteDot = ({ position, visible }) => {
+  const classNames =
+    position === "top"
+      ? "lg:left-[-68px] xl:left-[-72px]"
+      : "mt-[-20px] lg:ml-[-4px] lg:left-[50%]";
+
   return (
     <div
-      className="py-[4px] absolute z-20 left-0 mt-[-10px] lg:mt-[-20px] lg:ml-[-4px] lg:left-[50%]"
+      className={`py-[4px] absolute z-20 left-0 ${classNames}`}
       style={{ backgroundColor: "var(--bg-color-light)" }}
     >
       <div
-        className={`z-20 ml-[-1px] h-[12px] w-[12px] origin-center transform rounded-full border-[2px] transition-transform bg-white`}
+        className={`z-20 ml-[-1px] h-[12px] w-[12px] origin-center transform rounded-full border-[2px] transition-transform  ${
+          visible ? "ring-[2px] bg-indigo-500 ring-indigo-500" : "bg-white"
+        }`}
         style={{ borderColor: "var(--bg-color-light)" }}
       ></div>
     </div>
   );
 };
+const GridLine = () => {
+  return (
+    <div className="relative row-span-4 lg:absolute lg:h-full lg:w-full ">
+      <div
+        className="z-10 w-[2px] from-gray-100 absolute left-[50%] h-full"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, transparent, transparent 50%, var(--tw-gradient-from) 50%, var(--tw-gradient-from) 100%)",
+          backgroundSize: "2px 8px",
+          backgroundRepeat: "repeat-y",
+        }}
+      ></div>
+    </div>
+  );
+};
 
-const GridGradiant = (position) => {
+const GridLineGradiant = ({ position }) => {
+  if (position === "top") {
+    background = "linear-gradient(to top, var(--bg-color-light), transparent)";
+  } else if (position === "bottom") {
+    background =
+      "linear-gradient(to bottom, var(--bg-color-light), transparent)";
+  }
+
   return (
     <>
       <div className="h-[60px]"></div>
@@ -35,10 +64,7 @@ const GridGradiant = (position) => {
       <div
         className="absolute left-0 z-20 mt-[-60px] h-[60px] w-[8px] lg:left-[50%] lg:ml-[-1px]"
         style={{
-          background:
-            position === "top"
-              ? "linear-gradient(to bottom, var(--bg-color-light), transparent)"
-              : "linear-gradient(to top, var(--bg-color-light), transparent)",
+          background: background,
         }}
       ></div>
     </>
@@ -89,19 +115,7 @@ const ExperienceItem = ({
   return (
     <motion.div ref={ref} className="lg:pb-20 lg:relative pt-1">
       {/* Left blue dot */}
-      <div
-        className="py-[4px] absolute left-0 z-20 lg:left-[-68px] xl:left-[-72px]"
-        style={{ backgroundColor: "var(--bg-color-light)" }}
-      >
-        <div
-          className={`z-20 ml-[-1px] h-[12px] w-[12px] origin-center transform rounded-full border-[2px] transition-transform  ${
-            opacity === 1
-              ? "ring-[2px] bg-indigo-500 ring-indigo-500"
-              : "bg-white"
-          }`}
-          style={{ borderColor: "var(--bg-color-light)" }}
-        ></div>
-      </div>
+      <WhiteDot position="top" visible={opacity === 1} />
       <div style={{ opacity }}>
         <p className="mb-2 text-sm">{experience.year}</p>
         <h3 className="mb-2 font-semibold text-3xl">{experience.role}</h3>
@@ -140,30 +154,18 @@ const Experience = () => {
       style={{ backgroundColor: "var(--bg-color-light)" }}
     >
       <h2 className="py-20 text-center text-4xl">Experience</h2>
-      {/* Top white gradient */}
       <div className="relative">
-        <GridGradiant position="top" />
+        <GridLineGradiant position="top" />
       </div>
       <div className="relative">
         {/* container for the sticky avatar */}
-        <div className="absolute left-[20px] ml-[-8px] hidden h-full w-[16px] sm:left-[36px] lg:left-[50%] lg:block">
-          {/* sticky avater */}
+        <div className="absolute left-[20px] ml-[-8px] h-full w-[16px] sm:left-[36px] lg:left-[50%] lg:block">
           <StickyAvatar />
         </div>
         {/* container for the experience items and carousel */}
         <div className="grid grid-cols-[8px_1fr] gap-x-[20px] lg:grid-cols-1">
           {/* vertical line */}
-          <div className="relative row-span-4 lg:absolute lg:h-full lg:w-full ">
-            <div
-              className="z-10 w-[2px] from-gray-100 absolute left-[50%] h-full"
-              style={{
-                backgroundImage:
-                  "linear-gradient(180deg, transparent, transparent 50%, var(--tw-gradient-from) 50%, var(--tw-gradient-from) 100%)",
-                backgroundSize: "2px 8px",
-                backgroundRepeat: "repeat-y",
-              }}
-            ></div>
-          </div>
+          <GridLine />
           {/* container for the experience items */}
           <div className="flex flex-col gap-[24px] lg:flex-row-reverse lg:gap-[128px] ">
             <div className="lg:max-w-[540px] lg:flex-1">
@@ -189,8 +191,7 @@ const Experience = () => {
       </div>
       <div className="relative">
         <WhiteDot />
-        {/* Bottom white gradient */}
-        <GridGradiant position="bottom" />
+        <GridLineGradiant position="bottom" />
       </div>
     </CustomSection>
   );
