@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Skills from "./components/Skills";
 import { motion, AnimatePresence } from "framer-motion";
 import AvatarAnimationProvider from "./context/AvatarAnimationContext";
 import { EXPERIENCES, PROJECTS } from "./constants";
@@ -65,6 +66,7 @@ const App = () => {
                 initial="hidden"
                 animate={loading ? "hidden" : "visible"}
               >
+                <Skills />
                 <Experience SectionTopic={EXPERIENCES} title="Experience" />
                 <div className="h-28"></div>
                 <Experience SectionTopic={PROJECTS} title="Projects" />

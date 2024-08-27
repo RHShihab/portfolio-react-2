@@ -1,4 +1,3 @@
-import { EXPERIENCES } from "../constants";
 import CustomSection from "./custom/CustomSection";
 import DynamicCarousel from "./custom/DynamicCarousel";
 import StickyAvatar from "./custom/StickyAvatar";
@@ -109,9 +108,6 @@ const ListItemRow = ({
 
   useEffect(() => {
     console.log(`Updating listItemScrollIndex to: ${listItemScrollIndex}`);
-    if (navigator.vibrate) {
-      navigator.vibrate(5); // Vibrate for 5 milliseconds
-    }
   }, [listItemScrollIndex]);
 
   // Calculate opacity based on whether the index matches listItemScrollIndex

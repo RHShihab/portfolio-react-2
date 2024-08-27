@@ -5,10 +5,64 @@ import Shuchimita from "../assets/projects/Shuchimita.png";
 import Incubator from "../assets/projects/Incubator.png";
 import Incubator2 from "../assets/projects/Incubator2.png";
 
+import figmaIcon from "../assets/skills/figma.png";
+import reactIcon from "../assets/skills/react.png";
+import muiIcon from "../assets/skills/mui.png";
+import tailwindIcon from "../assets/skills/tailwind.png";
+import framermotionIcon from "../assets/skills/framermotion.png";
+import nodeIcon from "../assets/skills/node.png";
+import postgresqlIcon from "../assets/skills/postgresql.png";
+import firebaseIcon from "../assets/skills/firebase.png";
+
+import fusion360Icon from "../assets/skills/fusion360.png";
+import threeDIcon from "../assets/skills/3dprinting.png";
+
+import cppIcon from "../assets/skills/cpp.png";
+import pythonIcon from "../assets/skills/python.png";
+import arduinoIcon from "../assets/skills/arduino.png";
+import raspberrypiIcon from "../assets/skills/raspberrypi.png";
+
 export const HERO_CONTENT = `I am a multidisciplinary engineer with a passion for blending technology and design. From crafting intricate 3D models to developing seamless web interfaces and building robust embedded systems, I bring your ideas to life with creativity and precision. Proficient in tech stacks like React, Node.js, C++. I excel in both solo projects and collaborative environments. Let's create something extraordinary together.`;
 
 export const ABOUT_TEXT = `With 4 years of experience in designing medical products that adhere to international standards, I specialize in offering all-in-one IoT solutions. My expertise spans 3D modeling using Fusion 360, circuit design, and coding for embedded systems. I'm well-versed in creating custom web interfaces using React, along with mobile apps using Flutter.
 I'm also deeply passionate about robotics, having led a team to represent Bangladesh in the SAUVC 2024 competition. My interest in robotics drives me to innovate and collaborate, making me a strong team player who thrives on challenging projects. Whether it's an IoT project or a complex robotic system, I'm here to turn your vision into reality.`;
+
+export const SKILLS = [
+  {
+    title: "Web Development",
+    subtitle:
+      "I create dynamic, responsive websites with React.js and Node.js, specializing in custom UI design using Tailwind CSS and engaging animations with Framer Motion.",
+    icons: [
+      // { title: "Figma", icon: figmaIcon },
+      { title: "React JS", icon: reactIcon },
+      { title: "Material UI", icon: muiIcon },
+      { title: "Tailwind", icon: tailwindIcon },
+      { title: "Framer Motion", icon: framermotionIcon },
+      { title: "Node JS", icon: nodeIcon },
+      { title: "PostgreSQL", icon: postgresqlIcon },
+      { title: "Firebase", icon: firebaseIcon },
+    ],
+  },
+  {
+    title: "3D Modeling",
+    subtitle:
+      "While the icons here is less than the others, I have over 4 years of experience in designing and fabricating various products from patent pending medical devices to Automated Underwater Vehicles.",
+    icons: [
+      { title: "Fusion 360", icon: fusion360Icon },
+      { title: "3D Printing", icon: threeDIcon },
+    ],
+  },
+  {
+    title: "Embedded Programming",
+    subtitle: `I specialize in crafting fully integrated IoT devices using esp32, from designing the enclosure and embedded systems to creating interactive web UIs.\n If it connects to the internet, I can make it come to life!`,
+    icons: [
+      { title: "C++", icon: cppIcon },
+      { title: "Python", icon: pythonIcon },
+      { title: "Arduino", icon: arduinoIcon },
+      { title: "Raspberry Pi", icon: raspberrypiIcon },
+    ],
+  },
+];
 
 export const EXPERIENCES = [
   {
